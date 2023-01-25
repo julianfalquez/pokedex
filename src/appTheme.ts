@@ -52,5 +52,23 @@ theme.typography.h3 = {
     fontSize: '2rem',
   },
 };
+theme.typography.h2 = {
+  fontSize: '1.5rem',
+  '@media (min-width:600px)': {
+    fontSize: '1.8rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2.3rem',
+  },
+};
+theme.typography.h1 = {
+  fontSize: '1.8rem',
+  '@media (min-width:600px)': {
+    fontSize: '2.1rem',
+  },
+  [theme.breakpoints.up('md')]: {
+    fontSize: '2.6rem',
+  },
+};
 
 export default theme
