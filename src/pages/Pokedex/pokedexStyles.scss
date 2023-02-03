@@ -1,0 +1,10 @@
+$myColor: white;
+
+.sideBar {
+  background-color: $myColor;
+  border-radius: 30px;
+  margin: 20px;
+  overflow-y: scroll;
+  max-height: 85vh;
+}
+

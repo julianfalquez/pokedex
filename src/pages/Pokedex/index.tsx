@@ -1,9 +1,13 @@
-import Pokedex from './Pokedex'
+import Pokedex from "./Pokedex";
 
-function pokedexIndex() {
+function PokedexIndex() {
+
+
   return (
-    <Pokedex></Pokedex>
+    <>
+      <Pokedex></Pokedex>
+    </>
   );
 }
 
-export default pokedexIndex;
+export default PokedexIndex;

@@ -44,21 +44,22 @@ const theme = createTheme({
 });
 
 theme.typography.h3 = {
-  fontSize: '1.2rem',
+  fontSize: '1 rem',
   '@media (min-width:600px)': {
-    fontSize: '1.5rem',
+    fontSize: '1rem',
   },
   [theme.breakpoints.up('md')]: {
-    fontSize: '2rem',
+    fontSize: '1.4rem',
   },
+  color:'#f0f0f'
 };
 theme.typography.h2 = {
-  fontSize: '1.5rem',
+  fontSize: '1.2rem',
   '@media (min-width:600px)': {
-    fontSize: '1.8rem',
+    fontSize: '1.2rem',
   },
   [theme.breakpoints.up('md')]: {
-    fontSize: '2.3rem',
+    fontSize: '1.6rem',
   },
 };
 theme.typography.h1 = {
