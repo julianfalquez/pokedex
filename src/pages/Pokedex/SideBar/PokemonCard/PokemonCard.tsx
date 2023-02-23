@@ -1,17 +1,20 @@
 import React from "react";
-import { Pokemon } from "../../../../interfaces/pokemon";
-import "./pokemonCardStyles.scss";
+import { pokemonInterface } from "../../../../interfaces/pokemon";
 import { firstLetterUpperCase } from "../../../../utils/stringUtils";
+import "./pokemonCardStyles.scss";
+import { Link } from "react-router-dom";
 
 interface PokemonCard {
-  pokemon: Pokemon;
-  onClick: (pokemon: Pokemon) => void;
+  pokemon: pokemonInterface;
+  onClick: (pokemon: pokemonInterface) => void;
 }
 
 export const PokemonCard: React.FC<PokemonCard> = ({ pokemon, onClick }) => {
   return (
-    <li className="pokemonCard" onClick={() => onClick(pokemon)}>
-      <a>{firstLetterUpperCase(pokemon.name)}</a>
-    </li>
+    <Link style={{ textDecoration: "none", color:'black' }} to={`/pokedex/${pokemon.name}`}>
+      <li className="pokemonCardContainer" onClick={() => onClick(pokemon)}>
+        {firstLetterUpperCase(pokemon.name)}
+      </li>
+    </Link>
   );
 };

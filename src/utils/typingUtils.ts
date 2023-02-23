@@ -10,10 +10,11 @@ export const typingInfo = (types: string[]): Promise<any> => {
           `/type/${typingMap.get(type)["key"]}`,
       })
     )
-  ).then((values) => {
-    const weakTo = calculateWeaknesses(values);
-    const resistantTo = calculateResistant(values);
-    const inmuneTo = calculateInmunites(values);
+  ).then((typesInfo) => {
+    const weakTo = calculateDamageRelations(getWeaknessesArray(typesInfo));
+    const resistantTo = calculateDamageRelations(getResistantArray(typesInfo));
+    const inmuneTo = calculateInmunites(typesInfo);
+
     return {
       weakTo,
       resistantTo,
@@ -22,26 +23,24 @@ export const typingInfo = (types: string[]): Promise<any> => {
   });
 };
 
-const calculateWeaknesses = (values: any): string[] => {
-  const doubleDamageFrom = values
+const getWeaknessesArray = (typesInfo: any): any[] => {
+  return typesInfo
     .map((type: any) => {
       return type.damage_relations.double_damage_from.map((typeName: any) => {
-        return typeName.name;
+        return { type: typeName.name, times: 1 };
       });
     })
     .flat(1);
-  return doubleDamageFrom;
 };
 
-const calculateResistant = (values: any): string[] => {
-  const halfDamageFrom = values
+const getResistantArray = (typesInfo: any): string[] => {
+  return typesInfo
     .map((type: any) => {
       return type.damage_relations.half_damage_from.map((typeName: any) => {
-        return typeName.name;
+        return { type: typeName.name, times: 1 };
       });
     })
     .flat(1);
-  return halfDamageFrom;
 };
 
 const calculateInmunites = (values: any): string[] => {
@@ -52,4 +51,12 @@ const calculateInmunites = (values: any): string[] => {
       });
     })
     .flat(1);
+};
+
+const calculateDamageRelations = (arrayToFilter: any[]) => {
+  return arrayToFilter.filter((value, index, self) => {
+    const prueba = self.findIndex((t) => t.type === value.type);
+    if (index !== prueba) self[prueba].times = 2;
+    return index === prueba;
+  });
 };

@@ -1,5 +1,16 @@
-.pokemonCard {
+.pokemonCardContainer {
   padding: 30px 60px;
   list-style: none;
   border-bottom: 1px solid #a2a2be;
+  display: flex;
+  justify-content: center;
+}
+
+.pokemonList {
+  direction: "ltr";
+}
+.pokemonList li:hover {
+  background-color: rgb(235, 235, 235);
+
+  cursor: pointer;
 }

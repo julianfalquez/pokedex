@@ -1,0 +1,22 @@
+.progressBar {
+  background-color: rgba(5, 0, 0, 0.13);
+  height: 10px;
+  width: 100%;
+  border-radius: 10px;
+}
+.innerProgressBar {
+  background-color: rgba(230, 15, 15, 0.808);
+  height: 10px;
+  width: 0;
+  border-radius: 10px;
+  transition: width 1s;
+  transition-timing-function: ease-out;
+}
+
+.barContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: nowrap;
+}

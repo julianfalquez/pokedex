@@ -1,35 +1,51 @@
 import { PokemonCard } from "./PokemonCard/PokemonCard";
-import useFetch from "../../../hooks/useFetch";
-import { Pokemon } from "../../../interfaces/pokemon";
+import { pokemonInterface } from "../../../interfaces/pokemon";
 import { Props } from "../../../interfaces/pokemon";
+import { TextField } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
+import { setSelectedPokemon } from "../../../state/features/pokemon-slice";
+import pokemonLoadingGIF from '../../../assets/giphy.gif'
 
-interface sideBardProps {
-  handlePokemonClick: (pokemon: Pokemon) => void;
-}
-
-export const SideBar: React.FC<Props & sideBardProps> = ({
-  className,
-  handlePokemonClick,
-}) => {
-  const { isLoading, response, error } = useFetch({
-    url: process.env.REACT_APP_POKEMON_API + "/pokemon",
-    dependencies: [],
-  });
+export const SideBar: React.FC<Props> = ({ className }) => {
+  const [searchPokemon, setSearchPokemon] = useState([]);
+  const dispatch = useAppDispatch();
+  const { pokemonList, pokemonListIsLoading } = useAppSelector(
+    (state) => state.pokemon
+  );
+  useEffect(() => {
+    setSearchPokemon(pokemonList);
+  }, [pokemonList]);
+  const handleSearchChange = (event: any) => {
+    setSearchPokemon(
+      pokemonList.filter((pokemon: any) =>
+        pokemon.name.toUpperCase().includes(event.target.value.toUpperCase())
+      )
+    );
+  };
   return (
     <div className={className}>
-      {error && <p>Error loading UwU</p>}
-      {isLoading && <p>Loading</p>}
-      <ul style={{ padding: 0 }}>
-        {response
-          ? response.results.map((pokemon: Pokemon, index: number) => (
+      <TextField
+        sx={{ direction: "ltr" }}
+        id="filled-basic"
+        label="Search"
+        variant="filled"
+        onChange={handleSearchChange}
+      />
+      <div className="pokemonList">
+        {pokemonListIsLoading === "pending" && <img src={pokemonLoadingGIF} height='150px'/>}
+        <ul style={{ padding: 0 }}>
+          {(searchPokemon ?? []).map(
+            (pokemon: pokemonInterface, index: number) => (
               <PokemonCard
                 key={index}
                 pokemon={pokemon}
-                onClick={() => handlePokemonClick(pokemon)}
+                onClick={() => dispatch(setSelectedPokemon(pokemon))}
               />
-            ))
-          : null}
-      </ul>
+            )
+          )}
+        </ul>
+      </div>
     </div>
   );
 };

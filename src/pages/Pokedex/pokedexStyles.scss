@@ -2,9 +2,16 @@ $myColor: white;
 
 .sideBar {
   background-color: $myColor;
-  border-radius: 30px;
-  margin: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
   overflow-y: scroll;
   max-height: 85vh;
+  min-width: 267px;
+  direction: rtl;
 }
 
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

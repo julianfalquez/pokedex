@@ -1,29 +1,27 @@
-import { Typography } from "@mui/material";
 import { SideBar } from "./SideBar/SideBar";
-import { PokemonPage } from "./PokemonPage/PokemonPage";
+import { PokemonDashboard } from "./PokemonPage/PokemonDashboard";
 import { Container } from "@mui/system";
 import "./pokedexStyles.scss";
-import { useState } from "react";
-import { Pokemon } from "../../interfaces/pokemon";
+import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { useAppDispatch } from "../../state/hooks";
+import { fetchPokemonList } from "../../state/features/pokemon-slice";
 
 function Pokedex() {
-  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
-
-  const handlePokemonClick = async (pokemon: Pokemon) => {
-    setSelectedPokemon(pokemon);
-  };
-
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchPokemonList());
+  }, []);
+  
   return (
     <>
-      <Typography variant="h1" sx={{ color: "neutral.main" }}>
-        soy una poxedex
-      </Typography>
       <Container
         maxWidth={false}
+        disableGutters
         sx={{ display: "flex", flexDirection: "row", padding: 0 }}
       >
-        <SideBar className="sideBar" handlePokemonClick={handlePokemonClick} />
-        <PokemonPage selectedPokemon={selectedPokemon} />
+        <SideBar className="sideBar" />
+        <Outlet />
       </Container>
     </>
   );
