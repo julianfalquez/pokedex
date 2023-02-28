@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
@@ -19,12 +19,9 @@ const theme = createTheme();
 export default function SignIn() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
   };
+
+
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider);
@@ -61,7 +58,7 @@ export default function SignIn() {
               alignItems: "center",
             }}
           >
-            <img src={pokeLogo} height="80px" />
+            <img src={pokeLogo} height="80px" alt='pokelogo'/>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>

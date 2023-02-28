@@ -1,16 +1,11 @@
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import {
-  createBrowserRouter,
-  RouterProvider
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import appRouter from './router/index'
+import appRouter from "./router/index";
 
 firebase.initializeApp({
   apiKey: process.env.REACT_APP_API_KEY,
@@ -21,8 +16,6 @@ firebase.initializeApp({
   appId: process.env.REACT_APP_APP_ID,
 });
 export const auth = firebase.auth();
-
-const firestore = firebase.firestore();
 
 const router = createBrowserRouter(appRouter);
 

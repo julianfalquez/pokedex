@@ -6,6 +6,7 @@ import { UnAuthorizedRoute, AuthorizedRoute } from "./AuthWrapper";
 import { UserProfile } from "../pages/UserProfile/UserProfile";
 import SignIn from "../pages/SignIn/SignIn";
 import { SignUp } from "../pages/SignUp/SignUp";
+import { HomePage } from "../pages/HomePage/HomePage";
 
 const appRouter = [
   {
@@ -15,7 +16,16 @@ const appRouter = [
     children: [
       {
         path: "/",
-        element: <div>Soy el homePage</div>,
+        element: <HomePage />,
+      },
+      {
+        path: "profile",
+        element: (
+          <AuthorizedRoute>
+            <UserProfile></UserProfile>
+          </AuthorizedRoute>
+        ),
+        errorElement: <ErrorPage></ErrorPage>,
       },
       {
         path: "pokedex",
@@ -45,15 +55,6 @@ const appRouter = [
       <UnAuthorizedRoute>
         <SignUp></SignUp>
       </UnAuthorizedRoute>
-    ),
-    errorElement: <ErrorPage></ErrorPage>,
-  },
-  {
-    path: "profile",
-    element: (
-      <AuthorizedRoute>
-        <UserProfile></UserProfile>
-      </AuthorizedRoute>
     ),
     errorElement: <ErrorPage></ErrorPage>,
   },
