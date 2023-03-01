@@ -1,7 +1,11 @@
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  createHashRouter,
+} from "react-router-dom";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
@@ -17,7 +21,7 @@ firebase.initializeApp({
 });
 export const auth = firebase.auth();
 
-const router = createBrowserRouter(appRouter);
+const router = createHashRouter(appRouter);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
